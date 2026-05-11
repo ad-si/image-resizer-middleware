@@ -1,6 +1,6 @@
 # Image Resizer
 
-Sharp powered, multi threaded image resizing middleware.
+Sharp powered, multi-threaded image resizing middleware.
 
 
 ## Installation
@@ -25,7 +25,7 @@ const publicDirectory = path.join(__dirname, 'public')
 const app = express()
 
 app.use(getMiddleware({
-	basePath: path.join(publicDirectory, 'images'),
+	basePath: publicDirectory,
 	thumbnailsPath: path.join(publicDirectory, 'thumbnails'),
 }))
 app.use(express.static(publicDirectory))
@@ -36,7 +36,7 @@ app.listen(
 )
 ```
 
-Every request for an image at `/images/<path>/<to>/<image-file>`
+Every request for an image under `basePath`
 which also contains a width, height, max-width or max-height query parameter
 will be scaled to the specified value.
 
@@ -44,7 +44,7 @@ For example a request for
 `http://localhost:3000/images/test.png?max-width=50&max-height=50`
 triggers the creation of a proportionally scaled thumbnail
 with a maximum bounding box of 50px by 50px.
-It is saved at `$(pwd)/public/thumbnails/test_50x50>.png`
+It is saved at `$(pwd)/public/thumbnails/images/test_50x50>.png`
 and responded to the request.
 
 
