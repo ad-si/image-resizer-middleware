@@ -12,16 +12,19 @@ npm install --save image-resize-middleware
 
 ## Usage
 
-```js
-const path = require('path')
-const express = require('express')
-const imageResizer = require('image-resize-middleware')
+```ts
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import express from 'express'
+import { getMiddleware } from 'image-resize-middleware'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const port = 3000
 const publicDirectory = path.join(__dirname, 'public')
 
 const app = express()
 
-app.use(imageResizer.getMiddleware({
+app.use(getMiddleware({
 	basePath: path.join(publicDirectory, 'images'),
 	thumbnailsPath: path.join(publicDirectory, 'thumbnails'),
 }))
@@ -29,7 +32,7 @@ app.use(express.static(publicDirectory))
 
 app.listen(
 	port,
-	() => console.log('Listening on http://localhost:' + port)
+	() => console.log(`Listening on http://localhost:${port}`),
 )
 ```
 

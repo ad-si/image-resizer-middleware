@@ -1,36 +1,32 @@
-'use strict'
+import http from 'node:http'
+import startServer from './server.ts'
 
-const startServer = require('./server')
-const http = require('http')
 const port = 3000
 
 startServer(port, () => {
-
 	const maxWidth = 50
 	const maxHeight = 50
 
 	http
 		.get(
 			{
-				path: `/apple.png?` +
-					`max-width=${maxWidth}&` +
-					`max-height=${maxHeight}`,
-				port
+				path: `/apple.png?max-width=${maxWidth}&max-height=${maxHeight}`,
+				port,
 			},
 			(response) => {
-				response.on('data', data => {
+				response.on('data', (data: Buffer) => {
 					const actual = data.length
 					const expected = 2473
 					console.assert(
 						actual === expected,
-						`actual: ${actual}\nexpected: ${expected}`
+						`actual: ${actual}\nexpected: ${expected}`,
 					)
 				})
 				response.on('end', () => process.exit(0))
-				response.on('error', () => console.error)
-			}
+				response.on('error', (error) => console.error(error))
+			},
 		)
-		.on('error', error => {
+		.on('error', (error) => {
 			console.error(error.stack)
 			process.exit(1)
 		})
