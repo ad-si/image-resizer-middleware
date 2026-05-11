@@ -16,7 +16,7 @@ startServer(port, () => {
 			(response) => {
 				response.on('data', (data: Buffer) => {
 					const actual = data.length
-					const expected = 2473
+					const expected = 2076
 					console.assert(
 						actual === expected,
 						`actual: ${actual}\nexpected: ${expected}`,

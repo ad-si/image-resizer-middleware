@@ -1,6 +1,6 @@
 # Image Resizer
 
-GraphicsMagick powered, multi threaded image resizing middleware.
+Sharp powered, multi threaded image resizing middleware.
 
 
 ## Installation

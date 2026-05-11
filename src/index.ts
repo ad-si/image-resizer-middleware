@@ -2,7 +2,7 @@ import { mkdir, access } from 'node:fs/promises'
 import { createReadStream } from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
-import gm from 'gm'
+import sharp from 'sharp'
 import isImage from 'is-image'
 import type { Request, Response, NextFunction, RequestHandler } from 'express'
 
@@ -41,17 +41,16 @@ async function fileExists(filePath: string): Promise<boolean> {
 	}
 }
 
-function writeThumbnail(image: Image): Promise<void> {
-	return new Promise((resolve, reject) => {
-		gm(image.absolutePath)
-			.autoOrient()
-			.resize(image.width, image.height, image.modifier)
-			.noProfile()
-			.write(image.absoluteThumbnailPath, (error) => {
-				if (error) reject(error)
-				else resolve()
-			})
-	})
+async function writeThumbnail(image: Image): Promise<void> {
+	await sharp(image.absolutePath)
+		.rotate()
+		.resize({
+			width: image.width,
+			height: image.height,
+			fit: image.modifier === '!' ? 'fill' : 'inside',
+			withoutEnlargement: image.modifier === '>',
+		})
+		.toFile(image.absoluteThumbnailPath)
 }
 
 async function convert(image: Image): Promise<void> {
