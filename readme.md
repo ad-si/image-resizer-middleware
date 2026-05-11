@@ -6,7 +6,7 @@ Sharp powered, multi threaded image resizing middleware.
 ## Installation
 
 ```sh
-npm install --save image-resize-middleware
+npm install image-resizer-middleware
 ```
 
 
@@ -16,7 +16,7 @@ npm install --save image-resize-middleware
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import express from 'express'
-import { getMiddleware } from 'image-resize-middleware'
+import { getMiddleware } from 'image-resizer-middleware'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const port = 3000

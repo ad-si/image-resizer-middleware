@@ -46,10 +46,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adius/image-resizer.git"
+    "url": "git+https://github.com/ad-si/image-resizer-middleware.git"
   },
   "bugs": {
-    "url": "https://github.com/adius/image-resizer/issues"
+    "url": "https://github.com/ad-si/image-resizer-middleware/issues"
   },
-  "homepage": "https://github.com/adius/image-resizer#readme"
+  "homepage": "https://github.com/ad-si/image-resizer-middleware#readme"
 }
